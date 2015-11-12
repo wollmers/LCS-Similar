@@ -7,7 +7,6 @@ our $VERSION = '0.01';
 #use utf8;
 use Data::Dumper;
 
-our $width = int 0.999+log(~0)/log(2);
 
 sub new {
   my $class = shift;
@@ -15,13 +14,10 @@ sub new {
   bless @_ ? @_ > 1 ? {@_} : {%{$_[0]}} : {}, ref $class || $class;
 }
 
-# H. Hyyroe. A Note on Bit-Parallel Alignment Computation. In
-# M. Simanek and J. Holub, editors, Stringology, pages 79-87. Department
-# of Computer Science and Engineering, Faculty of Electrical
-# Engineering, Czech Technical University, 2004.
-
 sub LCS {
-  my ($self, $a, $b) = @_;
+  my ($self, $X, $Y, $compare) = @_;
+
+  $compare //= sub { $_[0] eq $_[0] };
 
   my $similarity = {};
 
@@ -37,18 +33,18 @@ sub LCS {
   }
   for ($i=1;$i<=$m;$i++) {
     for ($j=1;$j<=$n;$j++) {
-      if ($X->[$i-1] eq $Y->[$j-1]) {
-        $c->[$i][$j] = $c->[$i-1][$j-1]+1;
+      if ( my $sim = $X->[$i-1] eq $Y->[$j-1]) {
+        $c->[$i][$j] = $c->[$i-1][$j-1] + $sim;
       }
-      elsif (similarity($X->[$i-1],$Y->[$j-1]) > 0.7) {
-        $c->[$i][$j] = $c->[$i-1][$j-1]+similarity($X->[$i-1],$Y->[$j-1]);
-      }
+      #elsif (similarity($X->[$i-1],$Y->[$j-1]) > 0.7) {
+      #  $c->[$i][$j] = $c->[$i-1][$j-1]+similarity($X->[$i-1],$Y->[$j-1]);
+      #}
       else {
         $c->[$i][$j] = max($c->[$i][$j-1], $c->[$i-1][$j]);
       }
     }
   }
-  my $path = self->_lcs($X,$Y,$c,$m,$n,[]);
+  my $path = $self->_lcs($X,$Y,$c,$m,$n,[]);
 
   return $path;
 }
@@ -77,8 +73,6 @@ sub _lcs {
   }
   return $L;
 }
-
-
 
 1;
 
