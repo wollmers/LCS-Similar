@@ -5,8 +5,7 @@ use strict;
 use warnings;
 our $VERSION = '0.01';
 #use utf8;
-use Data::Dumper;
-
+#use Data::Dumper;
 
 sub new {
   my $class = shift;
@@ -17,9 +16,7 @@ sub new {
 sub LCS {
   my ($self, $X, $Y, $compare) = @_;
 
-  $compare //= sub { $_[0] eq $_[0] };
-
-  my $similarity = {};
+  $compare //= sub { $_[0] eq $_[1] };
 
   my $m = scalar @$X;
   my $n = scalar @$Y;
@@ -33,33 +30,35 @@ sub LCS {
   }
   for ($i=1;$i<=$m;$i++) {
     for ($j=1;$j<=$n;$j++) {
-      if ( my $sim = $X->[$i-1] eq $Y->[$j-1]) {
-        $c->[$i][$j] = $c->[$i-1][$j-1] + $sim;
-      }
-      #elsif (similarity($X->[$i-1],$Y->[$j-1]) > 0.7) {
-      #  $c->[$i][$j] = $c->[$i-1][$j-1]+similarity($X->[$i-1],$Y->[$j-1]);
-      #}
-      else {
-        $c->[$i][$j] = max($c->[$i][$j-1], $c->[$i-1][$j]);
-      }
+      $c->[$i][$j] = $self->max3(
+        &$compare($X->[$i-1],$Y->[$j-1]) + $c->[$i-1][$j-1],
+        $c->[$i][$j-1],
+        $c->[$i-1][$j],
+      );
     }
   }
-  my $path = $self->_lcs($X,$Y,$c,$m,$n,[]);
-
+  my $path = $self->_lcs($X,$Y,$c,$m,$n,[],$compare);
   return $path;
 }
 
 
-sub max {
-  ($_[0] > $_[1]) ? $_[0] : $_[1];
+sub max { ($_[1] > $_[2]) ? $_[1] : $_[2]; }
+
+sub max3 {
+  ($_[1] >= $_[2])
+    ? ($_[1] >= $_[3]
+      ? $_[1] : $_[3]
+    )
+    : ($_[2] >= $_[3]
+      ? $_[2] : $_[3]
+    );
 }
 
-
 sub _lcs {
-  my ($self,$X,$Y,$c,$i,$j,$L) = @_;
+  my ($self,$X,$Y,$c,$i,$j,$L,$compare) = @_;
 
   while ($i > 0 && $j > 0) {
-    if ($X->[$i-1] eq $Y->[$j-1]) {
+    if ( &$compare($X->[$i-1],$Y->[$j-1]) ) {
       unshift @{$L},[$i-1,$j-1];
       $i--;
       $j--;
