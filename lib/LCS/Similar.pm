@@ -14,7 +14,7 @@ sub new {
 }
 
 sub LCS {
-  my ($self, $X, $Y, $compare) = @_;
+  my ($self, $X, $Y, $compare, $threshold) = @_;
 
   $compare //= sub { $_[0] eq $_[1] };
 
@@ -31,13 +31,13 @@ sub LCS {
   for ($i=1;$i<=$m;$i++) {
     for ($j=1;$j<=$n;$j++) {
       $c->[$i][$j] = $self->max3(
-        &$compare($X->[$i-1],$Y->[$j-1]) + $c->[$i-1][$j-1],
+        &$compare($X->[$i-1],$Y->[$j-1], $threshold) + $c->[$i-1][$j-1],
         $c->[$i][$j-1],
         $c->[$i-1][$j],
       );
     }
   }
-  my $path = $self->_lcs($X,$Y,$c,$m,$n,[],$compare);
+  my $path = $self->_lcs($X,$Y,$c,$m,$n,[],$compare, $threshold);
   return $path;
 }
 
@@ -55,10 +55,10 @@ sub max3 {
 }
 
 sub _lcs {
-  my ($self,$X,$Y,$c,$i,$j,$L,$compare) = @_;
+  my ($self,$X,$Y,$c,$i,$j,$L,$compare, $threshold) = @_;
 
   while ($i > 0 && $j > 0) {
-    if ( &$compare($X->[$i-1],$Y->[$j-1]) ) {
+    if ( &$compare($X->[$i-1],$Y->[$j-1], $threshold) ) {
       unshift @{$L},[$i-1,$j-1];
       $i--;
       $j--;
@@ -132,6 +132,13 @@ returning a number between 0 and 1. Where 0 means unequal and 1 means equal.
 
 Without a subroutine the module falls back to string comparison.
 
+=item max($number1, $number2)
+
+Returns the maximum of two numbers.
+
+=item max3($number1, $number2, $number3)
+
+Returns the maximum of three numbers.
 
 =back
 

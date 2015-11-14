@@ -52,22 +52,43 @@ Manuscript accepted 04.04.2012
 camera (Leica DFC425) under a stereomicroscope (Leica MZ16). The same camera
 TEXT
   ],
+
+  [
+    [ split(/\n/,<<TEXT) ],
+o
+
+
+Thc dig drown fox
+
+jumps over
+TEXT
+
+    [ split(/\n/,<<TEXT) ],
+The big brown Foxes
+
+ahem
+jump over
+
+TEXT
+
+  ],
 ];
 
-  if (1) {
-    local $Data::Dumper::Deepcopy = 1;
-    print STDERR Data::Dumper->Dump([$examples],[qw(examples)]),"\n";
-  }
+if (0) {
+  local $Data::Dumper::Deepcopy = 1;
+  print STDERR Data::Dumper->Dump([$examples],[qw(examples)]),"\n";
+}
 
 #exit;
 
 my $examples2 = [];
 
 sub similarity {
-  my ($a, $b) = @_;
+  my ($a, $b, $threshold) = @_;
 
   $a //= '';
   $b //= '';
+  $threshold //= 0.7;
 
   return 1 if ($a eq $b);
   return 1 if (!$a && !$b);
@@ -77,37 +98,47 @@ sub similarity {
     [split(//,$b)],
   );
   my $similarity = (2 * $llcs) / (length($a) + length($b));
-  return $similarity;
+  return $similarity if ($similarity >= $threshold);
 }
 
 if (1) {
-for my $example (@$examples) {
-#for my $example ($examples->[1]) {
-  my $a = $example->[0];
-  my $b = $example->[1];
-  my @a = $a =~ /([^_])/g;
-  my @b = $b =~ /([^_])/g;
+  for my $example (0 .. $#$examples) {
+  #for my $example (1) {
+ 	for my $threshold (qw(0.1 0.5 0.7 1) ) {
+  	  my $a = $examples->[$example]->[0];
+  	  my $b = $examples->[$example]->[1];
 
-  my $lcs = LCS::Similar->LCS($a,$b,\&similarity);
-  my $all_lcs = LCS->allLCS($a,$b);
+  	  my $lcs = LCS::Similar->LCS($a,$b,\&similarity,0.1);
+  	  #my $lcs = LCS::Similar->LCS($a,$b,);
+  	  my $all_lcs = LCS->allLCS($a,$b);
 
-  if (1) {
-  cmp_deeply(
-    $lcs,
-    any(
-        $lcs,
-        supersetof(@{$all_lcs})
-    ),
-    "$a, $b"
-  );
+  	  if (1) {
+  		cmp_deeply(
+    	  $lcs,
+    	  any(
+        	$lcs,
+        	supersetof( @{$all_lcs} )
+    	  ),
+    	  "Example $example, Threshold $threshold"
+  	    );
+  	  }
+
+  	  if (1) {
+    	my $aligned = LCS->lcs2align($a,$b,$lcs);
+    	for my $chunk (@$aligned) {
+      	print 'a: ',$chunk->[0],"\n";
+      	print 'b: ',$chunk->[1],"\n";
+      	print "\n";
+    	}
+  	  }
+
+  	  if (0) {
+    	local $Data::Dumper::Deepcopy = 1;
+    	print STDERR Data::Dumper->Dump([$all_lcs],[qw(allLCS)]),"\n";
+    	print STDERR Data::Dumper->Dump([$lcs],[qw(LCS)]),"\n";
+  	  }
+    }
   }
-
-  if (0) {
-    local $Data::Dumper::Deepcopy = 1;
-    print STDERR Data::Dumper->Dump([$all_lcs],[qw(allLCS)]),"\n";
-    print STDERR Data::Dumper->Dump([$lcs],[qw(LCS)]),"\n";
-  }
-}
 }
 
 if (0) {

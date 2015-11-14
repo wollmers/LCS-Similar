@@ -44,6 +44,14 @@ LCS::Similar allows differences in the compared elements.
 
     Without a subroutine the module falls back to string comparison.
 
+- max($number1, $number2)
+
+    Returns the maximum of two numbers.
+
+- max3($number1, $number2, $number3)
+
+    Returns the maximum of three numbers.
+
 ## EXPORT
 
 None by design.
