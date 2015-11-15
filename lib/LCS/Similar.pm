@@ -31,7 +31,11 @@ sub LCS {
   for ($i=1;$i<=$m;$i++) {
     for ($j=1;$j<=$n;$j++) {
       $c->[$i][$j] = $self->max3(
-        &$compare($X->[$i-1],$Y->[$j-1], $threshold) + $c->[$i-1][$j-1],
+        &$compare(
+            $X->[$i-1],
+            $Y->[$j-1],
+            $threshold
+          ) + $c->[$i-1][$j-1],
         $c->[$i][$j-1],
         $c->[$i-1][$j],
       );
