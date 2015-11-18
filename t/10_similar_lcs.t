@@ -24,13 +24,13 @@ use_ok($class);
 
 my $object = new_ok($class);
 
-if (0) {
-ok($object->new());
-ok($object->new(1,2));
-ok($object->new({}));
-ok($object->new({a => 1}));
+if (1) {
+  ok($object->new());
+  ok($object->new(1,2));
+  ok($object->new({}));
+  ok($object->new({a => 1}));
 
-ok($class->new());
+  ok($class->new());
 }
 
 my $examples = [
@@ -93,6 +93,10 @@ my $examples2 = [
     dejinnmifnr
     deſum_mitur
   )],
+  [qw(
+    ittudo
+    titudo
+  )],
 ];
 
 sub confusable {
@@ -139,7 +143,7 @@ sub similarity {
   return $similarity if ($similarity >= $threshold);
 }
 
-if (0) {
+if (1) {
   for my $example (0 .. $#$examples) {
   #for my $example (1) {
  	for my $threshold (qw(0.1 0.5 0.7 1) ) {
