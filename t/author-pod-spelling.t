@@ -17,9 +17,10 @@ else {
   add_stopwords(qw(
      Helmut
      Wollmersdorfer
-     BV
      Subsequence
      wordsize
+     sequencies
+     textfiles
   ));
   all_pod_files_spelling_ok();
 }
