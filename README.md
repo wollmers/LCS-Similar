@@ -25,7 +25,7 @@ LCS::Similar allows differences in the compared elements.
 
 Pure LCS algorithms can be used for global alignment of two sequencies.
 
-Usally they provide one result, but there can be more than one solution
+Usually they provide one result, but there can be more than one solution
 fulfilling the criterion of being longest.
 
 For example this two sequencies have two possible LCS:
@@ -48,7 +48,7 @@ Or an example of mistyping:
 
 This is an actual result of a pure LCS algorithm. Here the letter n
 of the second line could align in 5 possible ways with one of the letters n
-of the first line, and the LCS will always have a lenght of 6.
+of the first line, and the LCS will always have a length of 6.
 
 But this solution better maps the mismatches:
 
