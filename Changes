@@ -1,6 +1,7 @@
 Revision history for LCS::Similar
 
 {{$NEXT}}
+        - typos in pod
 
 0.01  2015-11-18 22:49:50 CET
         - Initial release

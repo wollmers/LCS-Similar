@@ -3,7 +3,7 @@ package LCS::Similar;
 use 5.010001;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 #use utf8;
 #use Data::Dumper;
 
@@ -88,18 +88,18 @@ LCS::Similar - allow differences in the compared elements of
 
 =begin html
 
-<a href="https://travis-ci.org/wollmers/LCS-BV"><img src="https://travis-ci.org/wollmers/LCS-BV.png" alt="LCS-BV"></a>
-<a href='https://coveralls.io/r/wollmers/LCS-BV?branch=master'><img src='https://coveralls.io/repos/wollmers/LCS-BV/badge.png?branch=master' alt='Coverage Status' /></a>
-<a href='http://cpants.cpanauthors.org/dist/LCS-BV'><img src='http://cpants.cpanauthors.org/dist/LCS-BV.png' alt='Kwalitee Score' /></a>
-<a href="http://badge.fury.io/pl/LCS-BV"><img src="https://badge.fury.io/pl/LCS-BV.svg" alt="CPAN version" height="18"></a>
+<a href="https://travis-ci.org/wollmers/LCS-Similar"><img src="https://travis-ci.org/wollmers/LCS-Similar.png" alt="LCS-Similar"></a>
+<a href='https://coveralls.io/r/wollmers/LCS-Similar?branch=master'><img src='https://coveralls.io/repos/wollmers/LCS-Similar/badge.png?branch=master' alt='Coverage Status' /></a>
+<a href='http://cpants.cpanauthors.org/dist/LCS-Similar'><img src='http://cpants.cpanauthors.org/dist/LCS-Similar.png' alt='Kwalitee Score' /></a>
+<a href="http://badge.fury.io/pl/LCS-Similar"><img src="https://badge.fury.io/pl/LCS-Similar.svg" alt="CPAN version" height="18"></a>
 
 =end html
 
 =head1 SYNOPSIS
 
-  use LCS::BV;
+  use LCS::Similar;
 
-  $alg = LCS::BV->new;
+  $alg = LCS::Similar->new;
   @lcs = $alg->LCS(\@a,\@b);
 
 =head1 ABSTRACT
@@ -143,7 +143,7 @@ But this solution better maps the mismatches:
 
 Here the tilde ~ represents similarity of the aligned characters.
 
-With a function returning e.g. a similarity of 0.7 a comparison of
+With a function returning e.g. a similarity of 0.7 for a comparison of
 similar characters this module takes similarity into account for alignment.
 
 See examples.
