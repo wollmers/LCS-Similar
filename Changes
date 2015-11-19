@@ -1,6 +1,7 @@
 Revision history for LCS::Similar
 
 {{$NEXT}}
+        - turn on tests
 
 0.02  2015-11-19 01:02:30 CET
         - typos in pod

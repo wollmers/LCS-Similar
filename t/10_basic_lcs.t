@@ -21,7 +21,7 @@ use_ok($class);
 
 my $object = new_ok($class);
 
-if (0) {
+if (1) {
 ok($object->new());
 ok($object->new(1,2));
 ok($object->new({}));
@@ -94,21 +94,21 @@ my $examples2 = [
     'abcdefghijklmnopqrstuvwxyz012345678!9!"$%&/()=?ABCDEFGHIJKLMNOPQRSTUVYZ'],
 ];
 
-if (0) {
+if (1) {
   is($object->max(1,1),1,'1,1');
   is($object->max(1,0),1,'1,0');
   is($object->max(0,1),1,'0,1');
   is($object->max(0,0),0,'0,0');
 }
 
-if (0) {
+if (1) {
   is(LCS::Similar->max(1,1),1,'1,1');
   is(LCS::Similar->max(1,0),1,'1,0');
   is(LCS::Similar->max(0,1),1,'0,1');
   is(LCS::Similar->max(0,0),0,'0,0');
 }
 
-if (0) {
+if (1) {
   is($object->max3(1,1,1),1,'1,1,1');
   is($object->max3(1,1,0),1,'1,1,0');
   is($object->max3(0,1,1),1,'0,1,1');
@@ -117,7 +117,7 @@ if (0) {
   is($object->max3(0,0,0),0,'0,0,0');
 }
 
-if (0) {
+if (1) {
   is(LCS::Similar->max3(1,1,1),1,'1,1,1');
   is(LCS::Similar->max3(1,1,0),1,'1,1,0');
   is(LCS::Similar->max3(0,1,1),1,'0,1,1');
