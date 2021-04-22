@@ -208,7 +208,7 @@ Helmut Wollmersdorfer <helmut.wollmersdorfer@gmail.com>
 
 # COPYRIGHT AND LICENSE
 
-Copyright 2015 by Helmut Wollmersdorfer
+Copyright 2015-2021 by Helmut Wollmersdorfer
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
