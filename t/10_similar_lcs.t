@@ -190,7 +190,7 @@ if (1) {
   	    my $a = $examples->[$example]->[0];
   	    my $b = $examples->[$example]->[1];
 
-  	    my $lcs = LCS::Similar->LCS($a,$b,\&similarity,$threshold);
+  	    my $lcs = LCS::Similar->LCS($a,$b,);
   	    #my $lcs = LCS::Similar->LCS($a,$b,);
   	    my $all_lcs = LCS->allLCS($a,$b);
 
@@ -201,7 +201,7 @@ if (1) {
                     	$lcs,
                     	supersetof( @{$all_lcs} )
     	            ),
-    	            "Example $example, Threshold $threshold"
+    	            "Example $example, Threshold undef"
   	         );
   	    }
 
