@@ -1,6 +1,7 @@
 Revision history for LCS::Similar
 
 {{$NEXT}}
+        - prefix and suffix optimization
 
 0.03  2015-11-19 06:51:01 CET
         - turn on tests
