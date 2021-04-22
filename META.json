@@ -55,7 +55,7 @@
    "provides" : {
       "LCS::Similar" : {
          "file" : "lib/LCS/Similar.pm",
-         "version" : "0.03"
+         "version" : "0.04"
       }
    },
    "release_status" : "stable",
@@ -70,7 +70,7 @@
          "web" : "https://github.com/wollmers/LCS-Similar"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_contributors" : [
       "Helmut Wollmersdorfer <helmut@wollmersdorfer.at>"
    ],
